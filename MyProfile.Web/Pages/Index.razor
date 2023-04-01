@@ -1,0 +1,15 @@
+﻿@page "/"
+@inject IConfiguration _config;
+@using MyProfile.Web.Shared
+
+<PageTitle>Hola Mundo!</PageTitle>
+<ModuleTitle Title="Hola Mundo!"></ModuleTitle>
+
+@code {
+    private string sqlconnectionString = "";
+
+    protected override void OnInitialized()
+    {
+        sqlconnectionString = _config.GetConnectionString("SqlServer");
+    }
+}
