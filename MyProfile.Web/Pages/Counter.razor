@@ -1,47 +1,18 @@
-@page "/counter/{currentCountParameter?}"
-@inject ILogger<Counter> _logger;
+﻿@page "/counter"
 
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
 
-<p role="status">Current Count: @currentcount</p>
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
+    private int currentCount = 0;
 
-  [SupplyParameterFromQuery]
-  [Parameter]
-  public string? CounterFromQuery { get; set; }
-
-  [Parameter]
-  public string? currentCountParameter { get; set; }
-
-  private int currentcount = 0;
-
-  public override async Task SetParametersAsync(ParameterView parameters)
-  {
-    // Este siempre es el primero que se ejecuta
-    if (parameters.TryGetValue<string>(nameof(currentCountParameter), out var value))
+    private void IncrementCount()
     {
-      currentCountParameter = value ?? currentCountParameter;
+        currentCount++;
     }
-  
-    await base.SetParametersAsync(parameters);
-  }
-
-  protected override void OnParametersSet()
-  {
-    _logger.LogInformation("Send parameters");
-  }
-
-  protected override void OnInitialized()
-  {
-    _logger.LogInformation("al iniciar la app");
-    currentcount = int.Parse(CounterFromQuery ?? "0");
-  }
-
-  protected override void OnAfterRender(bool firstRender)
-  {
-    _logger.LogInformation("Despues de iniciado el componente");
-  }
 }

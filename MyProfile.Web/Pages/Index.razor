@@ -1,15 +1,9 @@
 ﻿@page "/"
-@inject IConfiguration _config
-@using MyProfile.Web.Shared
 
-<PageTitle>Hola Mundo!</PageTitle>
-<ModuleTitle Title="Hola Mundo!"></ModuleTitle>
+<PageTitle>Index</PageTitle>
 
-@code {
-    private string sqlconnectionString = "";
+<h1>Hello, world!</h1>
 
-    protected override void OnInitialized()
-    {
-        sqlconnectionString = _config.GetConnectionString("SqlServer");
-    }
-}
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
